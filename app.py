@@ -5,9 +5,9 @@ import lightgbm as lgb
 import numpy as np
 
 # Load the AKD and CKD models
-aki_model = lgb.Booster(model_file='C:/Users/15562/Desktop/aki_model.txt')
-akd_model = lgb.Booster(model_file='C:/Users/15562/Desktop/akd_model.txt')
-mortality_model = lgb.Booster(model_file='C:/Users/15562/Desktop/mortality_model.txt')
+aki_model = lgb.Booster(model_file='aki_model.txt')
+akd_model = lgb.Booster(model_file='akd_model.txt')
+mortality_model = lgb.Booster(model_file='mortality_model.txt')
 
 # 改成自己的分类指标
 AKI_stage_mapping = {"Stage 0": 0, "Stage 1": 1, "Stage 2": 2, "Stage 3": 3}
