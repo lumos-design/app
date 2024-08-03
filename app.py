@@ -85,7 +85,7 @@ def main():
         # Map AKIGrade back to 0, 1, 2, 3 for prediction
             AKI_stage_encoded = AKI_stage_mapping[AKI_stage]        #疑问  有可能报错
             Aspirin_encoded = Aspirin_mapping[Aspirin]
-            Coronary_heart_disease_encoded = Coronary_heart_disease_mapping[CHD]
+            Coronary_heart_disease_encoded = Coronary_heart_disease_mapping[Coronary_heart_disease]
             features.extend([AKI_stage_encoded, Scr, Hemoglobin, RBC, GGT, Total_Bilirubin,
        Triglycerides, LDH, Albumin, Thrombin_Time,Coronary_heart_disease_encoded, Aspirin_encoded])
 
@@ -113,9 +113,9 @@ def main():
             Fibrinogen = st.number_input("Fibrinogen (g/L)", value=0.0, format="%.2f", key="Fibrinogen_AKI")
 
 
-            Chronic_kidney_disease_encoded = Chronic_kidney_disease_mapping[CKD]        #改这里
+            Chronic_kidney_disease_encoded = Chronic_kidney_disease_mapping[Chronic_kidney_disease]        #改这里
             Aspirin_encoded = Aspirin_mapping[Aspirin]
-            Coronary_heart_disease_encoded = Coronary_heart_disease_mapping[CHD]
+            Coronary_heart_disease_encoded = Coronary_heart_disease_mapping[Coronary_heart_disease]
             Pneumonia_encoded = Pneumonia_mapping[Pneumonia]
 
             features.extend([Scr, Glucose, Na, Platelets, WBC, Total_Bilirubin,
@@ -139,7 +139,7 @@ def main():
             Na = st.number_input("Na(mmol/L)", value=0.0, format="%.2f", key="Na_mortality")
             Glucose = st.number_input("Glucose (mmol/L)", value=0.0, format="%.2f", key="Glucose_mortality")
             Platelets = st.number_input("Platelets (10^9/L)", value=0.0, format="%.2f", key="Platelets_mortality")
-            NRS_2002_score = st.selectbox("NRS-2002 score", ["3", "4", "5", "6","7" ], key="NRS_2002_score_mortality")
+            NRS_2002_score = st.selectbox("NRS-2002 score", ["3", "4", "5", "6","7" ], key="NRS-2002_score_mortality")
 
 
             Cardiac_glycosides_encoded = Cardiac_glycosides_mapping[Cardiac_glycosides]
