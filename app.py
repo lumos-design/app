@@ -80,7 +80,7 @@ def main():
             GGT = st.number_input("GGT (U/L)", value=0.0, format="%.2f", key="GGT_AKD")
             Coronary_heart_disease = st.selectbox("Coronary heart disease", ["NO", "Yes"], key="CHD_AKD")
             Hemoglobin = st.number_input("Hemoglobin (g/L)", value=0.0, format="%.2f", key="Hemoglobin_AKD")
-            Triglycerides = st.number_input("Triglycerides (mmol/L)", value=0.0, format="%.2f", key="Triglycerides_AKI")
+            Triglycerides = st.number_input("Triglycerides (mmol/L)", value=0.0, format="%.2f", key="Triglycerides_AKD")
 
         # Map AKIGrade back to 0, 1, 2, 3 for prediction
             AKI_stage_encoded = AKI_stage_mapping[AKI_stage]        #疑问  有可能报错
@@ -96,7 +96,7 @@ def main():
         elif prediction_type == "AKI Prediction":
             st.subheader("AKI Features")
  
-            Coronary_heart_disease = st.selectbox("Coronary heart disease", ["NO", "Yes"], key="CHD_AKD")
+            Coronary_heart_disease = st.selectbox("Coronary heart disease", ["NO", "Yes"], key="CHD_AKI")
             Glucose = st.number_input("Glucose (mmol/L)", value=0.0, format="%.2f", key="Glucose_AKI")
             Scr = st.number_input("Scr (umol/L)", value=0.0, format="%.2f", key="Scr_AKI")
             Total_Bilirubin = st.number_input("Total Bilirubin (umol/L)", value=0.0, format="%.2f", key="Total_Bilirubin_AKI")
@@ -119,7 +119,7 @@ def main():
             Pneumonia_encoded = Pneumonia_mapping[Pneumonia]
 
             features.extend([Scr, Glucose, Na, Platelets, WBC, Total_Bilirubin,
-             LDL, LDH, UA, Total_Protein, Fibrinogen, Chronic_kidney_disease_encoded,Pneumonia, Cardiac_glycosides_encoded, Aspirin_encoded])
+             LDL, LDH, UA, Total_Protein, Fibrinogen, Chronic_kidney_disease_encoded,Pneumonia, Coronary_heart_disease_encoded, Aspirin_encoded])
 
 
             if st.button("Predict AKI Probability"):
@@ -127,30 +127,30 @@ def main():
                 st.write(f"AKI Probability: {aki_prob:.2f}")
 
         elif prediction_type == "mortality Prediction":
-            st.subheader("Mortality Features")
-
-            Cardiac_glycosides = st.selectbox("Cardiac glycosides", ["NO", "Yes"], key="Cardiac_glycosides_mortality")
-            Trajectory = st.selectbox("Trajectory", ["NKD" ,"AKI recovery","subacute AKD","AKD with AKI"], key="Trajectory_mortality")
-            LDH = st.number_input("LDH (U/L)", value=0.0, format="%.2f", key="LDH_mortality")
-            Albumin_Globulin_Ratio = st.number_input("Albumin Globulin Ratio", value=0.0, format="%.2f", key="Albumin_Globulin_Ratio_mortality")
-            Albumin = st.number_input("Albumin (g/L)", value=0.0, format="%.2f", key="Albumin_mortality")
-            WBC = st.number_input("WBC (10^9/L)", value=0.0, format="%.2f", key="WBC_mortality")
-            Prothrombin_Time = st.number_input("Prothrombin Time (s)", value=0.0, format="%.2f", key="Thrombin_Time_mortality") 
-            Na = st.number_input("Na(mmol/L)", value=0.0, format="%.2f", key="Na_mortality")
-            Glucose = st.number_input("Glucose (mmol/L)", value=0.0, format="%.2f", key="Glucose_mortality")
-            Platelets = st.number_input("Platelets (10^9/L)", value=0.0, format="%.2f", key="Platelets_mortality")
-            NRS_2002_score = st.selectbox("NRS-2002 score", ["3", "4", "5", "6","7" ], key="NRS-2002_score_mortality")
+            st.subheader("mortality Features")
 
 
-            Cardiac_glycosides_encoded = Cardiac_glycosides_mapping[Cardiac_glycosides]
-            Trajectory_encoded = Trajectory_mapping[Trajectory]
-            NRS_2002_score_encoded = NRS_2002_score_mapping[NRS_2002_score]
-            features.extend([Trajectory_encoded, NRS_2002_score_encoded, Glucose, Na, Platelets,
-            WBC, GGT, LDH, Albumin, Albumin_Globulin_Ratio, Prothrombin_Time, Cardiac_glycosides_encoded])
+        Cardiac_glycosides = st.selectbox("Cardiac glycosides", ["NO", "Yes"], key="Cardiac_glycosides_mortality")
+        Trajectory = st.selectbox("Trajectory", ["NKD", "AKI recovery", "subacute AKD", "AKD with AKI"], key="Trajectory_mortality")
+        LDH = st.number_input("LDH (U/L)", value=0.0, format="%.2f", key="LDH_mortality")
+        Albumin_Globulin_Ratio = st.number_input("Albumin Globulin Ratio", value=0.0, format="%.2f", key="Albumin_Globulin_Ratio_mortality")
+        Albumin = st.number_input("Albumin (g/L)", value=0.0, format="%.2f", key="Albumin_mortality")
+        WBC = st.number_input("WBC (10^9/L)", value=0.0, format="%.2f", key="WBC_mortality")
+        Prothrombin_Time = st.number_input("Prothrombin Time (s)", value=0.0, format="%.2f", key="Thrombin_Time_mortality") 
+        Na = st.number_input("Na (mmol/L)", value=0.0, format="%.2f", key="Na_mortality")
+        Glucose = st.number_input("Glucose (mmol/L)", value=0.0, format="%.2f", key="Glucose_mortality")
+        Platelets = st.number_input("Platelets (10^9/L)", value=0.0, format="%.2f", key="Platelets_mortality")
+        NRS_2002_score = st.selectbox("NRS-2002 score", ["3", "4", "5", "6", "7"], key="NRS-2002_score_mortality")
 
-            if st.button("Predict Mortality Probability"):
-                mortality_prob = predict_mortality_probability(np.array(features).reshape(1, -1))
-                st.write(f"Mortality Probability: {mortality_prob:.2f}")
+        Cardiac_glycosides_encoded = Cardiac_glycosides_mapping[Cardiac_glycosides]
+        Trajectory_encoded = Trajectory_mapping[Trajectory]
 
-if __name__ == '__main__':
+        features = [Trajectory_encoded, NRS_2002_score, Glucose, Na, Platelets,
+                    WBC, LDH, Albumin, Albumin_Globulin_Ratio, Prothrombin_Time, Cardiac_glycosides_encoded]
+
+        if st.button("Predict mortality Probability"):
+            mortality_prob = predict_mortality_probability(np.array(features).reshape(1, -1))
+            st.write(f"mortality Probability: {mortality_prob:.2f}")
+
+if __name__ == "__main__":
     main()
