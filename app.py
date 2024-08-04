@@ -119,7 +119,7 @@ def main():
             Pneumonia_encoded = Pneumonia_mapping[Pneumonia]
 
             features.extend([Scr, Glucose, Na, Platelets, WBC, Total_Bilirubin,
-             LDL, LDH, UA, Total_Protein, Fibrinogen, Chronic_kidney_disease_encoded,Pneumonia_encoded, Coronary_heart_disease_encoded, Aspirin_encoded])
+             LDL, LDH, UA, Total_protein, Fibrinogen, Chronic_kidney_disease_encoded,Pneumonia_encoded, Coronary_heart_disease_encoded, Aspirin_encoded])
 
 
             if st.button("Predict AKI Probability"):
