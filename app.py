@@ -35,6 +35,13 @@ def predict_mortality_probability(features):
 def main():
     st.title('AKD, AKI and mortality Probability Prediction in malnourished patients')
 
+    # 检查模型是否正确加载
+    try:
+        print("Mortality model loaded with", mortality_model.num_feature(), "features.")
+    except Exception as e:
+        print("Error loading mortality model:", e)
+        st.error("Error loading mortality model. Please check the model file.")
+
 # User selects which content to display 第一页介绍
     selected_content = st.radio("", ("Model Introduction", "AKD, AKI and mortality Prediction"))
 
