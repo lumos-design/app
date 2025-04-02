@@ -151,9 +151,9 @@ def main():
 
             Cardiac_glycosides_encoded = Cardiac_glycosides_mapping[Cardiac_glycosides]
             Trajectory_encoded = Trajectory_mapping[Trajectory]
-
-            features = [Trajectory_encoded, NRS_2002_score, Glucose, Na, Platelets,
-                    WBC, LDH, Albumin, Albumin_Globulin_Ratio, Prothrombin_Time, Cardiac_glycosides_encoded]
+            
+            features.extend([Trajectory_encoded, NRS_2002_score, Glucose, Na, Platelets,
+                    WBC, LDH, Albumin, Albumin_Globulin_Ratio, Prothrombin_Time, Cardiac_glycosides_encoded])
 
             if st.button("Predict mortality Probability"):
                 mortality_prob = predict_mortality_probability(np.array(features).reshape(1, -1))
