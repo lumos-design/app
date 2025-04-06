@@ -35,13 +35,6 @@ def predict_mortality_probability(features):
 def main():
     st.title('AKD, AKI and mortality Probability Prediction in malnourished patients')
 
-    # 检查模型是否正确加载
-    try:
-        print("Mortality model loaded with", mortality_model.num_feature(), "features.")
-    except Exception as e:
-        print("Error loading mortality model:", e)
-        st.error("Error loading mortality model. Please check the model file.")
-
 # User selects which content to display 第一页介绍
     selected_content = st.radio("", ("Model Introduction", "AKD, AKI and mortality Prediction"))
 
@@ -148,12 +141,13 @@ def main():
             Glucose = st.number_input("Glucose (mmol/L)", value=0.0, format="%.2f", key="Glucose_mortality")
             Platelets = st.number_input("Platelets (10^9/L)", value=0.0, format="%.2f", key="Platelets_mortality")
             NRS_2002_score = st.selectbox("NRS-2002 score", ["3", "4", "5", "6", "7"], key="NRS_2002_score_mortality")
+            GGT = st.number_input("GGT (U/L)", value=0.0, format="%.2f", key="GGT_mortality")
 
             Cardiac_glycosides_encoded = Cardiac_glycosides_mapping[Cardiac_glycosides]
             Trajectory_encoded = Trajectory_mapping[Trajectory]
             
             features.extend([Trajectory_encoded, NRS_2002_score, Glucose, Na, Platelets,
-                    WBC, LDH, Albumin, Albumin_Globulin_Ratio, Prothrombin_Time, Cardiac_glycosides_encoded])
+                    WBC, LDH, Albumin, GGT, Albumin_Globulin_Ratio, Prothrombin_Time, Cardiac_glycosides_encoded])
 
             if st.button("Predict mortality Probability"):
                 mortality_prob = predict_mortality_probability(np.array(features).reshape(1, -1))
