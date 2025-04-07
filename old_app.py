@@ -6,9 +6,10 @@ import numpy as np
 import pandas as pd
 
 # Load the AKD and CKD models
-aki_model = lgb.Booster(model_file='C:/Users/15562/Desktop/aki_model.txt')
-akd_model = lgb.Booster(model_file='C:/Users/15562/Desktop/akd_model.txt')
-mortality_model = lgb.Booster(model_file='C:/Users/15562/Desktop/death_model.txt')
+# Load the AKD and CKD models
+aki_model = lgb.Booster(model_file='aki_model.txt')
+akd_model = lgb.Booster(model_file='akd_model.txt')
+mortality_model = lgb.Booster(model_file='death_model.txt')
 
 # Mapping dictionaries for encoding categorical variables
 AKI_stage_mapping = {"Stage 0": 0, "Stage 1": 1, "Stage 2": 2, "Stage 3": 3}
